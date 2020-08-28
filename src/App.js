@@ -10,7 +10,7 @@ import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 import {BrowserRouter, Route} from "react-router-dom";
 import FriendsList from "./components/FriendsList/FriendsList";
-import {addPost} from "./redux/state";
+import {addPost, updateNewPostText} from "./redux/state";
 
 
 
@@ -23,7 +23,11 @@ const App = (props) => {
                 <Navbar/>
                 <div className="app-wrapper-content">
                     <Route path='/dialogs' render={() => <Dialogs state={props.state.messagesPage}/>}/>
-                    <Route path='/profile' render={() => <Profile state={props.state.profilePage} addPost={props.addPost} /> }/>
+                    <Route path='/profile'
+                        render={() => <Profile
+                            profilePage={props.state.profilePage}
+                            addPost={props.addPost}
+                            updateNewPostText={props.updateNewPostText} /> }/>
                     <Route path='/news' render={() => <News/> }/>
                     <Route path='/music' render={() => <Music/> }/>
                     <Route path='/settings' render={() => <Settings/> }/>

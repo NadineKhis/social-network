@@ -5,6 +5,7 @@ import female4 from "../images/dialogs/avatars/female4.jpg";
 import male1 from "../images/dialogs/avatars/male1.jpg";
 import male2 from "../images/dialogs/avatars/male2.jpg";
 import male3 from "../images/dialogs/avatars/male3.jpg";
+import {rerenderEntireTree} from "../render";
 
 let state = {
     profilePage: {
@@ -14,6 +15,7 @@ let state = {
             {id: 3, message: ':-)', likesCount: 2},
             {id: 3, message: 'c\'mon baby light my fire', likesCount: 2},
         ],
+        newPostText: 'Enter a text',
     },
 
     messagesPage: {
@@ -42,16 +44,23 @@ let state = {
         ],
     },
 
+
+
 };
 
-export let addPost = (postMessage) => {
+export let addPost = () => {
     let newPost = {
         id: 5,
-        message: postMessage,
+        message: state.profilePage.newPostText,
         likesCount: 0
     };
-
     state.profilePage.posts.push(newPost);
+    rerenderEntireTree(state);
+    state.profilePage.newPostText = '';
+}
+export let updateNewPostText = (newText) => {
+    state.profilePage.newPostText = newText;
+    rerenderEntireTree(state);
 }
 
 export default state;

@@ -5,8 +5,11 @@ import female4 from "../images/dialogs/avatars/female4.jpg";
 import male1 from "../images/dialogs/avatars/male1.jpg";
 import male2 from "../images/dialogs/avatars/male2.jpg";
 import male3 from "../images/dialogs/avatars/male3.jpg";
-import {rerenderEntireTree} from "../render";
+// import {rerenderEntireTree} from "../index.js"
 
+let rerenderEntireTree = () => {
+    console.log('state is changed')
+}
 let state = {
     profilePage: {
         posts: [
@@ -44,11 +47,9 @@ let state = {
         ],
     },
 
-
-
 };
 
-export let addPost = () => {
+export const addPost = () => {
     let newPost = {
         id: 5,
         message: state.profilePage.newPostText,
@@ -58,9 +59,12 @@ export let addPost = () => {
     rerenderEntireTree(state);
     state.profilePage.newPostText = '';
 }
-export let updateNewPostText = (newText) => {
+export const updateNewPostText = (newText) => {
     state.profilePage.newPostText = newText;
     rerenderEntireTree(state);
 }
 
+export const  subscribe = (observer) => {
+    rerenderEntireTree = observer;
+}
 export default state;
